@@ -252,29 +252,35 @@ Public Class DataOperations
 
         Dim customerList = New List(Of Customer)
 
-        Dim selectStatement As String = "SELECT Id,FirstName,LastName,Address" &
-                            ",City,State,ZipCode,JoinDate,Pin,Balance " &
-                            "FROM dbo.Customer"
+        Dim selectStatement As String =
+                "SELECT Id,FirstName,LastName,Address" &
+                ",City,State,ZipCode,JoinDate,Pin,Balance " &
+                "FROM dbo.Customer"
 
         Try
             Using cn = New SqlConnection(ConnectionString)
-                Using cmd = New SqlCommand() With {.Connection = cn, .CommandText = selectStatement}
+                Using cmd = New SqlCommand() With {.Connection = cn}
+
+                    cmd.CommandText = selectStatement
+
                     cn.Open()
+
                     Dim reader As SqlDataReader = cmd.ExecuteReader
+
                     While reader.Read
                         customerList.Add(New Customer With
-                {
-                    .Id = reader.GetInt32(0),
-                    .FirstName = reader.GetStringSafe("FirstName"),
-                    .LastName = reader.GetStringSafe("LastName"),
-                    .Address = reader.GetStringSafe("Address"),
-                    .City = reader.GetStringSafe("City"),
-                    .State = reader.GetStringSafe("State"),
-                    .ZipCode = reader.GetStringSafe("ZipCode"),
-                    .JoinDate = reader.GetDateTimeSafe("JoinDate"),
-                    .Pin = reader.GetInt32Safe("Pin"),
-                    .Balance = reader.GetDoubleSafe("Balance")
-                })
+                        {
+                            .Id = reader.GetInt32(0),
+                            .FirstName = reader.GetStringSafe("FirstName"),
+                            .LastName = reader.GetStringSafe("LastName"),
+                            .Address = reader.GetStringSafe("Address"),
+                            .City = reader.GetStringSafe("City"),
+                            .State = reader.GetStringSafe("State"),
+                            .ZipCode = reader.GetStringSafe("ZipCode"),
+                            .JoinDate = reader.GetDateTimeSafe("JoinDate"),
+                            .Pin = reader.GetInt32Safe("Pin"),
+                            .Balance = reader.GetDoubleSafe("Balance")
+                        })
                     End While
                 End Using
             End Using
