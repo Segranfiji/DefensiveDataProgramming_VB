@@ -1,4 +1,5 @@
 ﻿Imports ExceptionsLibrary
+Imports DataConnections.BaseSqlServerConnections
 ''' <summary>
 ''' Pre-configure connection string using a default server 
 ''' and catalog. In a normal solution this is all that should
@@ -15,7 +16,7 @@
 ''' via LastException property in BaseExceptionsHandler.
 ''' </summary>
 Public Class BaseSqlServerConnections
-    Inherits BaseExceptionsHandler
+
 
     ''' <summary>
     ''' This points to your database server

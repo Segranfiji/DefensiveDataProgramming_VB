@@ -1,7 +1,7 @@
 ﻿Imports DataConnections
 Imports System.Data.SqlClient
 Public Class DataOperations
-    Inherits BaseSqlServerConnections
+    Inherits BaseConnectionLibrary.ConnectionClasses.SqlServerConnection
     ''' <summary>
     ''' By default we have the catalog set to use
     ''' </summary>
